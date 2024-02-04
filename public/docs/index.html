@@ -1,0 +1,2147 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/all.js"></script>
+
+
+          <script>
+        $(function() {
+            setupLanguages(["bash","javascript"]);
+        });
+      </script>
+      </head>
+
+  <body class="">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+        <img src="images/logo.png" />
+                    <div class="lang-selector">
+                                  <a href="#" data-language-name="bash">bash</a>
+                                  <a href="#" data-language-name="javascript">javascript</a>
+                            </div>
+                            <div class="search">
+              <input type="text" class="search" id="input-search" placeholder="Search">
+            </div>
+            <ul class="search-results"></ul>
+              <div id="toc">
+      </div>
+                    <ul class="toc-footer">
+                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+                            </ul>
+            </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+          <!-- START_INFO -->
+<h1>Info</h1>
+<p>Welcome to the generated API reference.</p>
+<!-- END_INFO -->
+<h1>Bank</h1>
+<!-- START_7c3036c023eb4795ce8b74d2dd725aff -->
+<h2>Get Bank Details</h2>
+<p>Get the bank details of driver</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "https://dev-driver.mickaido.com/api/getBankDetails" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/getBankDetails"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "bankNumber": "The bank number field is required.",
+        "transitNumber": "The transit number field is required.",
+        "accountNumber": "The account number field is required.",
+        "bankName": "The bank name field is required.",
+        "accountName": "The account name field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "driverDetailId": 14,
+        "bankNumber": 9999,
+        "transitNumber": 32767,
+        "accountNumber": 32767,
+        "bankName": "Canada Bank",
+        "accountName": "John Stark",
+        "driverBankStatus": "A"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/getBankDetails</code></p>
+<!-- END_7c3036c023eb4795ce8b74d2dd725aff -->
+<!-- START_0c896bb30275920bf3c45f29315b3c18 -->
+<h2>Add Bank Details</h2>
+<p>Add the bank details of driver</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/addBankDetails" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"bankNumber":"9999","transitNumber":"99999","accountNumber":"9999999999999","bankName":"Induslnd","accountName":"John Clark"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/addBankDetails"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "bankNumber": "9999",
+    "transitNumber": "99999",
+    "accountNumber": "9999999999999",
+    "bankName": "Induslnd",
+    "accountName": "John Clark"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "bankNumber": "The bank number field is required.",
+        "transitNumber": "The transit number field is required.",
+        "accountNumber": "The account number field is required.",
+        "bankName": "The bank name field is required.",
+        "accountName": "The account name field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Successfully Bank Details Added"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/addBankDetails</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bankNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>bookingId</td>
+</tr>
+<tr>
+<td><code>transitNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>bookingId</td>
+</tr>
+<tr>
+<td><code>accountNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>bookingId</td>
+</tr>
+<tr>
+<td><code>bankName</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>bookingId</td>
+</tr>
+<tr>
+<td><code>accountName</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>bookingId</td>
+</tr>
+</tbody>
+</table>
+<!-- END_0c896bb30275920bf3c45f29315b3c18 -->
+<h1>Driver</h1>
+<!-- START_9d922524bad7d153f5eb6cc7a5c0b4ef -->
+<h2>Driver Vehicle</h2>
+<p>Get driver vehicle details</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "https://dev-driver.mickaido.com/api/getVehicleDetails" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/getVehicleDetails"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "No Content",
+    "exceptionCode": "E_NO_CONTENT",
+    "trace": {
+        "msg": "No Records found"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "vehicleDetailId": 1,
+        "vehicleTypeId": 1,
+        "driverVehicleNumber": "231",
+        "driverDetailId": 14,
+        "driverVehicleStatus": "A",
+        "isTemporary": "Y",
+        "registeredOn": "2020-06-11T18:30:00.000000Z",
+        "vehicleBrandDetails": "BMW",
+        "vehicleColor": "blue",
+        "vehicleModel": "123",
+        "vehicle_type": {
+            "vehicleTypeId": 1,
+            "vehicleTypeName": "Bike",
+            "wheelerType": 2,
+            "isVehicleActive": "Y",
+            "maxWeight": 150,
+            "vehicleDimensions": 55,
+            "vehicleImage": "VehicleImage"
+        }
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/getVehicleDetails</code></p>
+<!-- END_9d922524bad7d153f5eb6cc7a5c0b4ef -->
+<h1>Driver Profile Update</h1>
+<!-- START_b1944ac867a35354ae6615b9f94d7b03 -->
+<h2>Driver Profile</h2>
+<p>Update the driver profile</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/updateDriverProfile" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"driverName":"John","driverEmail":"John@example.com","gender":"M","dob":"1970-01-01"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/updateDriverProfile"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "driverName": "John",
+    "driverEmail": "John@example.com",
+    "gender": "M",
+    "dob": "1970-01-01"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "No Content",
+    "exceptionCode": "E_NO_CONTENT",
+    "trace": {
+        "msg": "No Records found"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Driver profile updated"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/updateDriverProfile</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>driverName</code></td>
+<td>string</td>
+<td>required</td>
+<td>driver Name</td>
+</tr>
+<tr>
+<td><code>driverEmail</code></td>
+<td>email</td>
+<td>required</td>
+<td>driver Email</td>
+</tr>
+<tr>
+<td><code>gender</code></td>
+<td>string</td>
+<td>required</td>
+<td>driverName</td>
+</tr>
+<tr>
+<td><code>dob</code></td>
+<td>string</td>
+<td>required</td>
+<td>dob</td>
+</tr>
+</tbody>
+</table>
+<!-- END_b1944ac867a35354ae6615b9f94d7b03 -->
+<h1>DriverRaidStatus</h1>
+<!-- START_90c03bb430c5a073bef8b07f7ebc869e -->
+<h2>Driver Raid Status</h2>
+<p>Update the driver raid status with Geolocation</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/driver/updateRaidStatus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"raidStatus":"A","vehicleType":"A","long":"79.1455566","lat":"14.1001101"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/driver/updateRaidStatus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "raidStatus": "A",
+    "vehicleType": "A",
+    "long": "79.1455566",
+    "lat": "14.1001101"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "No Content",
+    "exceptionCode": "E_NO_CONTENT",
+    "trace": {
+        "msg": "No Records found"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Driver Raid status updated"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/driver/updateRaidStatus</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raidStatus</code></td>
+<td>string</td>
+<td>required</td>
+<td>Driver Raid Status</td>
+</tr>
+<tr>
+<td><code>vehicleType</code></td>
+<td>string</td>
+<td>required</td>
+<td>Driver Vehicle Type</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>string</td>
+<td>required</td>
+<td>Driver Longitude</td>
+</tr>
+<tr>
+<td><code>lat</code></td>
+<td>string</td>
+<td>required</td>
+<td>Driver latitude</td>
+</tr>
+</tbody>
+</table>
+<!-- END_90c03bb430c5a073bef8b07f7ebc869e -->
+<h1>General</h1>
+<!-- START_d0996c19f1d88ac65a4457e75bcf5b85 -->
+<h2>Log out</h2>
+<p>Log the Driver out (Invalidate the token).</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me/logout" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/logout"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me/logout</code></p>
+<!-- END_d0996c19f1d88ac65a4457e75bcf5b85 -->
+<!-- START_d131f717df7db546af1657d1e7ce10f6 -->
+<h2>Profile</h2>
+<p>Get the authenticated User.</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "driverDetailId": 14,
+        "driverMobileNumber": "9885109796",
+        "driverEmail": "anand@gmail.com",
+        "driverName": "Anand Kuma Akurathi",
+        "gender": "N",
+        "driverStatus": "A",
+        "isVerified": "I",
+        "countryCode": "IN",
+        "documentVerified": "NU",
+        "dateOfBirth": null,
+        "profileImagePath": "https:\/\/gogoproofs.s3.ap-south-1.amazonaws.com\/driver\/14\/15905443489f3227eb62c9234c26682437b09ee60a3a749544.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA4POWCBHXY3P6KV3I%2F20200709%2Fap-south-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200709T130654Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=600&amp;X-Amz-Signature=eb185e46dc6b0990d33480d23f39bc78835c7ebc1c9d696fb1870355de6655d8",
+        "countryName": "India",
+        "isdCode": "+91",
+        "currencyCode": "INR",
+        "currencyName": "Indian Rupee",
+        "currencySymbol": "₹",
+        "documents": [
+            {
+                "id": 1,
+                "name": "Address Proof",
+                "driverDocumentID": 8,
+                "documentStatus": "U"
+            },
+            {
+                "id": 5,
+                "name": "ID Proof",
+                "driverDocumentID": null,
+                "documentStatus": null
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me</code></p>
+<!-- END_d131f717df7db546af1657d1e7ce10f6 -->
+<!-- START_306d706c4d18fdfc94b570c2ab75e2cf -->
+<h2>Upload documents</h2>
+<p>This API is part of driver authentication. To validate his identity</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me/upload" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"driving-licence.jpeg","documentCategoryId":"1"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/upload"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "driving-licence.jpeg",
+    "documentCategoryId": "1"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "documentCategoryId": "The document category id field is required.",
+        "file": "The file field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unauthorized access",
+    "exceptionCode": "E_UNAUTHORIZED",
+    "trace": {
+        "error": "OOps..! You are not allowed to do this activity"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Document uploaded successfully"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me/upload</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>file</td>
+<td>required</td>
+<td>file types mimes:jpeg,png,jpg,pdf are allowed as docs</td>
+</tr>
+<tr>
+<td><code>documentCategoryId</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>Document category Id</td>
+</tr>
+</tbody>
+</table>
+<!-- END_306d706c4d18fdfc94b570c2ab75e2cf -->
+<!-- START_be6de347b7bd04885912ead945420479 -->
+<h2>Upload profile pic</h2>
+<p>This API is part of driver authentication. To validate his identity</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me/uploadProfilePic" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"driving-licence.jpeg"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/uploadProfilePic"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "driving-licence.jpeg"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "file": "The file field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unauthorized access",
+    "exceptionCode": "E_UNAUTHORIZED",
+    "trace": {
+        "error": "OOps..! You are not allowed to do this activity"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Document uploaded successfully"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me/uploadProfilePic</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>file</td>
+<td>required</td>
+<td>file types mimes:jpeg,png,jpg are allowed as docs</td>
+</tr>
+</tbody>
+</table>
+<!-- END_be6de347b7bd04885912ead945420479 -->
+<!-- START_8b5a03a67f8540684c1a9005a447663c -->
+<h2>my documents</h2>
+<p>Get the document to preview</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "https://dev-driver.mickaido.com/api/me/document?documentCategoryId=1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/document"
+);
+
+let params = {
+    "documentCategoryId": "1",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "No Content",
+    "exceptionCode": "E_NO_CONTENT",
+    "trace": {
+        "msg": "No Records found"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "url": {
+            "img1": "https:\/\/gogoproofs.s3.ap-south-1.amazonaws.com\/driver\/14\/15905440899f3227eb62c9234c26682437b09ee60a3a749544.jpeg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA4POWCBHXY3P6KV3I%2F20200626%2Fap-south-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200626T150219Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=600&amp;X-Amz-Signature=498a31b6011dd87871e6f737391c220caadadb9a0080cb3e08ba5d2d8c6b6587"
+        }
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/me/document</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>documentCategoryId</code></td>
+<td>optional</td>
+<td>numeric required Customer Document Category Id</td>
+</tr>
+</tbody>
+</table>
+<!-- END_8b5a03a67f8540684c1a9005a447663c -->
+<h1>GetDriverRaidStatus</h1>
+<!-- START_ac51a0eaf4e1ce4d286c74d06da0bd5f -->
+<h2>Driver Raid Status</h2>
+<p>Get driver raid status</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "https://dev-driver.mickaido.com/api/driver/getRaidStatus" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/driver/getRaidStatus"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "No Content",
+    "exceptionCode": "E_NO_CONTENT",
+    "trace": {
+        "msg": "No Records found"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "raidStatus": "A"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/driver/getRaidStatus</code></p>
+<!-- END_ac51a0eaf4e1ce4d286c74d06da0bd5f -->
+<h1>Locations</h1>
+<!-- START_93d574ab1ec2ebc433b48b4ef9fc7f5e -->
+<h2>Update Driver Location</h2>
+<p>Update the driver location using booking Id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/updateDriverLocation" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"bookingId":"1","long":"78.374174","lat":"78.374174"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/updateDriverLocation"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "bookingId": "1",
+    "long": "78.374174",
+    "lat": "78.374174"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/updateDriverLocation</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bookingId</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>bookingId</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>string</td>
+<td>required</td>
+<td>latitude</td>
+</tr>
+<tr>
+<td><code>lat</code></td>
+<td>string</td>
+<td>required</td>
+<td>longitude</td>
+</tr>
+</tbody>
+</table>
+<!-- END_93d574ab1ec2ebc433b48b4ef9fc7f5e -->
+<h1>Login</h1>
+<!-- START_6cacfc6bfff00efbfbfd6aa598ecf948 -->
+<h2>Login Step One</h2>
+<p>This API is part of driver Login step one.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/login/stepOne" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/login/stepOne"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "OTP sent to the registered mobile number"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/login/stepOne</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the driver</td>
+</tr>
+</tbody>
+</table>
+<!-- END_6cacfc6bfff00efbfbfd6aa598ecf948 -->
+<!-- START_57254abaaaa59858d5b71779c9a60400 -->
+<h2>Login Step Two</h2>
+<p>This API is part of driver registration step two.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/login/stepTwo" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789","otpNumber":"1234"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/login/stepTwo"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789",
+    "otpNumber": "1234"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (408):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "OTP expired.",
+    "exceptionCode": "E_OTP_EXPIRED",
+    "trace": {
+        "msg": "OTP has been expired"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number field is required.",
+        "otpNumber": "The otp number field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Thanks for registering with us.",
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpblwvc3RlcFR3byIsImlhdCI6MTU4OTAxNTk5NywiZXhwIjoxNTg5MDE5NTk3LCJuYmYiOjE1ODkwMTU5OTcsImp0aSI6Im9PMlFwT2RySjE1N2tJZEEiLCJzdWIiOjYsInBydiI6IjAxZGM0NDZjMTE3MzEzNTFhMjEzNDM4ZTZlZTVmNjE5YTMyM2U2MTEifQ.UaDhDyetpTvOcqlp4kAe70YoURHha3k192QqesSmPpQ",
+        "token_type": "bearer",
+        "expires_in": 3600
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/login/stepTwo</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the driver</td>
+</tr>
+<tr>
+<td><code>otpNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>Otp shared on register mobile number</td>
+</tr>
+</tbody>
+</table>
+<!-- END_57254abaaaa59858d5b71779c9a60400 -->
+<!-- START_9cb0b2e4d1a33e9ded0b8debd640ed70 -->
+<h2>Login resend OTP</h2>
+<p>This API is part of driver mobile validation. If the OTP not arrived driver may request for resend the OTP using below service.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/login/resendOtp" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/login/resendOtp"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (429):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Too Many Requests",
+    "exceptionCode": "E_THROTTLE",
+    "trace": {
+        "error": "Too Many Attempts."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "OTP sent to the registered mobile number"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/login/resendOtp</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the driver</td>
+</tr>
+</tbody>
+</table>
+<!-- END_9cb0b2e4d1a33e9ded0b8debd640ed70 -->
+<h1>Master Data</h1>
+<!-- START_316a4c3b4f6a4c4ff34e5893943cdebd -->
+<h2>Countries List Mini</h2>
+<p>Countries List used for registration screen where we show country flag and ISD code fo country.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "https://dev-driver.mickaido.com/api/countries" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/countries"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "countries": [
+            {
+                "countryName": "India",
+                "countryCode": "IN",
+                "isdCode": "+91",
+                "currencyCode": "INR",
+                "currencyName": "Indian Rupee",
+                "currencySymbol": "₹"
+            },
+            {
+                "countryName": "UK",
+                "countryCode": "UK",
+                "isdCode": "+11",
+                "currencyCode": "GBP",
+                "currencyName": "Pounds",
+                "currencySymbol": "£"
+            },
+            {
+                "countryName": "Srilanka",
+                "countryCode": "LK",
+                "isdCode": "+94",
+                "currencyCode": "LKR",
+                "currencyName": "Rupee",
+                "currencySymbol": "Rp"
+            },
+            {
+                "countryName": "United States of America",
+                "countryCode": "US",
+                "isdCode": "+1",
+                "currencyCode": "USD",
+                "currencyName": "Dollar",
+                "currencySymbol": "$"
+            },
+            {
+                "countryName": "Germany",
+                "countryCode": "",
+                "isdCode": "+49",
+                "currencyCode": "EUR",
+                "currencyName": "EURO",
+                "currencySymbol": "€"
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/countries</code></p>
+<!-- END_316a4c3b4f6a4c4ff34e5893943cdebd -->
+<!-- START_2db491b98c54e01029e35dcce36f2edf -->
+<h2>Documents required</h2>
+<p>Documents List used for authenticity. Customer must upload all these to unleash all features of application.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "https://dev-driver.mickaido.com/api/documents?customerType=2" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/documents"
+);
+
+let params = {
+    "customerType": "2",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "customerType": "The customer type is invalid"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "documentCategory": [
+            {
+                "id": 1,
+                "name": "Address Proof",
+                "documentTypes": [
+                    {
+                        "id": 2,
+                        "name": "Aadhaar",
+                        "description": "Aadhaar card as Address proof"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Voter ID",
+                        "description": "Voter ID with Photo ID"
+                    },
+                    {
+                        "id": 7,
+                        "name": "Electrocity Bill",
+                        "description": "Electricity Bill of residence address"
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "name": "ID Proof",
+                "documentTypes": [
+                    {
+                        "id": 1,
+                        "name": "Aadhaars",
+                        "description": "Aadhaar card as ID proof"
+                    },
+                    {
+                        "id": 8,
+                        "name": "Pan Card",
+                        "description": "Permenant card issued by GOV"
+                    }
+                ]
+            }
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/documents</code></p>
+<h4>Query Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customerType</code></td>
+<td>optional</td>
+<td>numeric required Type of the customer [1=&gt; 'Corporate', 2=&gt; 'Individual']</td>
+</tr>
+</tbody>
+</table>
+<!-- END_2db491b98c54e01029e35dcce36f2edf -->
+<h1>Pickup</h1>
+<!-- START_518527b1314564fc24e7eb0def908e2b -->
+<h2>Upload Picture</h2>
+<p>This API is used to upload picture of pickup items and send OTP to user</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/uploadPickUpImage" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"file":"driving-licence.jpeg","bookingId":"1","confirmationType":"Pickup,Drop"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/uploadPickUpImage"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "file": "driving-licence.jpeg",
+    "bookingId": "1",
+    "confirmationType": "Pickup,Drop"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "bookingId": "The booking id field is required.",
+        "imageType": "The image type field is required.",
+        "file": "The file field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": "OTP successfully sent to customer registered mobile number."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/uploadPickUpImage</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>file</td>
+<td>required</td>
+<td>file types mimes:jpeg,png,jpg,pdf are allowed as docs</td>
+</tr>
+<tr>
+<td><code>bookingId</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>Booking Id</td>
+</tr>
+<tr>
+<td><code>confirmationType</code></td>
+<td>string</td>
+<td>required</td>
+<td>Confirmation Type</td>
+</tr>
+</tbody>
+</table>
+<!-- END_518527b1314564fc24e7eb0def908e2b -->
+<!-- START_bcaed2bdbc41045e0a02ef713e0c5f1b -->
+<h2>OTP Validate</h2>
+<p>This API is used to validate the pickup/drop OTP</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/bookingOtpValidate" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789","otpNumber":"1234"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/bookingOtpValidate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789",
+    "otpNumber": "1234"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Invalid OTP",
+    "exceptionCode": "E_INVALID_OTP",
+    "trace": {
+        "msg": "Please enter valid OTP shared on register mobile number."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "OTP Validated Successfully"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/bookingOtpValidate</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the customer</td>
+</tr>
+<tr>
+<td><code>otpNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>Otp shared on customer mobile number</td>
+</tr>
+</tbody>
+</table>
+<!-- END_bcaed2bdbc41045e0a02ef713e0c5f1b -->
+<h1>Registration</h1>
+<!-- START_4e03bf1d27bcf610f6ef5196875da2e3 -->
+<h2>Registration Step One</h2>
+<p>This API is part of driver registration step one.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/registration/stepOne" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789","emailAddress":"example@gmail.com","driverName":"Jhon Bob","countryCode":"IND"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/registration/stepOne"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789",
+    "emailAddress": "example@gmail.com",
+    "driverName": "Jhon Bob",
+    "countryCode": "IND"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "driverName": "The customer name field is required.",
+        "emailAddress": "The email address field is required.",
+        "mobileNumber": "The mobile number field is required.",
+        "countryCode": "The country code field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number already registered with us. Please login."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "OTP sent to the registered mobile number"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/registration/stepOne</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the driver</td>
+</tr>
+<tr>
+<td><code>emailAddress</code></td>
+<td>string</td>
+<td>required</td>
+<td>email address of the driver</td>
+</tr>
+<tr>
+<td><code>driverName</code></td>
+<td>string</td>
+<td>required</td>
+<td>Name of the driver</td>
+</tr>
+<tr>
+<td><code>countryCode</code></td>
+<td>alpha</td>
+<td>required</td>
+<td>country code</td>
+</tr>
+</tbody>
+</table>
+<!-- END_4e03bf1d27bcf610f6ef5196875da2e3 -->
+<!-- START_4c73bd4dbfb67883f9cdac3e8977562d -->
+<h2>Registration Step Two</h2>
+<p>This API is part of driver registration step two.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/registration/stepTwo" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789","otpNumber":"1234"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/registration/stepTwo"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789",
+    "otpNumber": "1234"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (408):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "OTP expired.",
+    "exceptionCode": "E_OTP_EXPIRED",
+    "trace": {
+        "msg": "OTP has been expired"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number field is required.",
+        "otpNumber": "The otp number field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Thanks for registering with us.",
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9yZWdpc3RyYXRpb25cL3N0ZXBUd28iLCJpYXQiOjE1ODkwMTQ5OTEsImV4cCI6MTU4OTAxODU5MSwibmJmIjoxNTg5MDE0OTkxLCJqdGkiOiJLWUFUeHl5U2FoQnpZMkFyIiwic3ViIjo4LCJwcnYiOiIwMWRjNDQ2YzExNzMxMzUxYTIxMzQzOGU2ZWU1ZjYxOWEzMjNlNjExIn0.v-eNwCxYcK_XElc-xm9wpLvr0VTSqwe1B_A0HeQuF-k",
+        "token_type": "bearer",
+        "expires_in": 3600
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/registration/stepTwo</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the driver</td>
+</tr>
+<tr>
+<td><code>otpNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>Otp shared on register mobile number</td>
+</tr>
+</tbody>
+</table>
+<!-- END_4c73bd4dbfb67883f9cdac3e8977562d -->
+<!-- START_6323188d9be2a77b78b27ee3eb9fe65c -->
+<h2>Registration resend OTP</h2>
+<p>This API is part of driver mobile validation. If the OTP not arrived driver may request for resend the OTP using below service.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/registration/resendOtp" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"mobileNumber":"9123456789"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/registration/resendOtp"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "mobileNumber": "9123456789"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "mobileNumber": "The mobile number field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (429):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Too Many Requests",
+    "exceptionCode": "E_THROTTLE",
+    "trace": {
+        "error": "Too Many Attempts."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "OTP sent to the registered mobile number"
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/registration/resendOtp</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mobileNumber</code></td>
+<td>numeric</td>
+<td>required</td>
+<td>mobile number of the driver</td>
+</tr>
+</tbody>
+</table>
+<!-- END_6323188d9be2a77b78b27ee3eb9fe65c -->
+<h1>Vehicle</h1>
+<!-- START_533be132d8bb70751dbee774182b86bf -->
+<h2>Add Vehicle</h2>
+<p>Driver will add his vehicle details</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me/addVehicleDetails" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"driverVehicleNumber":"quibusdam","vehicleTypeId":17,"isTemporary":"tempora","registeredOn":"nostrum","registrationExpiringOn":"aperiam","vehicleBrandDetails":"aliquid","vehicleColor":"eius","vehicleModel":"animi"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/addVehicleDetails"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "driverVehicleNumber": "quibusdam",
+    "vehicleTypeId": 17,
+    "isTemporary": "tempora",
+    "registeredOn": "nostrum",
+    "registrationExpiringOn": "aperiam",
+    "vehicleBrandDetails": "aliquid",
+    "vehicleColor": "eius",
+    "vehicleModel": "animi"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (422):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Unprocessable Entity",
+    "exceptionCode": "E_VALIDATION",
+    "trace": {
+        "driverVehicleNumber": "The driver vehicle number field is required.",
+        "vehicleBrandDetails": "The vehicle brand details field is required."
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "failure",
+    "message": "Bad request",
+    "exceptionCode": "E_REQUEST_INVALID",
+    "trace": {
+        "msg": "custom.invalidGovtRegExpiryDate"
+    }
+}</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "msg": "Vehicle is added successfully",
+        "vehicleDetailId": 3
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me/addVehicleDetails</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>driverVehicleNumber</code></td>
+<td>string</td>
+<td>required</td>
+<td>driver's vehicle number</td>
+</tr>
+<tr>
+<td><code>vehicleTypeId</code></td>
+<td>integer</td>
+<td>required</td>
+<td>you will get this id from vehicleTypes api</td>
+</tr>
+<tr>
+<td><code>isTemporary</code></td>
+<td>string</td>
+<td>required</td>
+<td>Whether vehicle is for temporary or permenant vehicle Ex: 'Y' or 'N'</td>
+</tr>
+<tr>
+<td><code>registeredOn</code></td>
+<td>date</td>
+<td>required</td>
+<td>vehicle registration date Ex: 2020-06-13 (YYYY-MM-DD)</td>
+</tr>
+<tr>
+<td><code>registrationExpiringOn</code></td>
+<td>date</td>
+<td>required</td>
+<td>vehicle expiry date of registration Ex: 2020-06-13 (YYYY-MM-DD)</td>
+</tr>
+<tr>
+<td><code>vehicleBrandDetails</code></td>
+<td>string</td>
+<td>required</td>
+<td>Ex: BMW, SWIFT etc.</td>
+</tr>
+<tr>
+<td><code>vehicleColor</code></td>
+<td>string</td>
+<td>required</td>
+<td>color of vehicle</td>
+</tr>
+<tr>
+<td><code>vehicleModel</code></td>
+<td>string</td>
+<td>required</td>
+<td>model of vehicle</td>
+</tr>
+</tbody>
+</table>
+<!-- END_533be132d8bb70751dbee774182b86bf -->
+<h1>Wallet</h1>
+<!-- START_2cc1a01f5a43467ae2e4ebe20b1f0f1e -->
+<h2>My Wallet Info</h2>
+<p>To get the wallet details</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me/wallet" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/wallet"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "accountHolderId": 1,
+        "accountHolderMobile": 9885109781,
+        "accountHolderStatus": "A",
+        "balance": {
+            "accountBalance": 0,
+            "accountSuspendBalance": 0,
+            "currentBalance": 0
+        }
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me/wallet</code></p>
+<!-- END_2cc1a01f5a43467ae2e4ebe20b1f0f1e -->
+<!-- START_1901942391c1c691b0ffdbafb82ecb61 -->
+<h2>Wallet Balance</h2>
+<p>To get the balance of the wallet</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "https://dev-driver.mickaido.com/api/me/wallet/balance" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "https://dev-driver.mickaido.com/api/me/wallet/balance"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "status": "success",
+    "message": "",
+    "exceptionCode": "E_NO_ERRORS",
+    "data": {
+        "accountBalance": 0,
+        "accountSuspendBalance": 0,
+        "currentBalance": 0
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/me/wallet/balance</code></p>
+<!-- END_1901942391c1c691b0ffdbafb82ecb61 -->
+      </div>
+      <div class="dark-box">
+                        <div class="lang-selector">
+                                    <a href="#" data-language-name="bash">bash</a>
+                                    <a href="#" data-language-name="javascript">javascript</a>
+                              </div>
+                </div>
+    </div>
+  </body>
+</html>
