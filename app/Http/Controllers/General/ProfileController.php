@@ -33,7 +33,7 @@ class ProfileController extends Controller
      * @param  Request  $request
      * @return json
      */
-    public function me(Request $request)
+    public function index(Request $request)
     {
         $driverDocuments = DriverDetail::find($request->driverId);
         $documents = $this->driverDocumentsWithStatus($request);

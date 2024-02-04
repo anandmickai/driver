@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Services;
 
-use App\Models\CustomerOtp;
+use App\Models\DriverOtp;
 use App\Repositories\Contracts\OtpContract;
 use App\Services\OtpService;
 use App\Traits\Communication\Twilio;
@@ -11,8 +11,10 @@ use Carbon\Carbon;
 class Otp implements OtpContract
 {
     use Twilio;
+
     protected $otp;
     const OTP_STATUS_SENT = 'S';
+    const OTP_BLOCKED = 'blocked';
 
     protected $response = [];
 
@@ -39,7 +41,9 @@ class Otp implements OtpContract
         }
 
         $otpId = $this->otp->saveOtpInformation($mobileNumber, $otpType, $otpNumber);
+
         $this->smsRequestSender($mobileNumber, $otpNumber);
+
         return true;
     }
 
@@ -56,7 +60,7 @@ class Otp implements OtpContract
         }
 
         if ($otpInfo->otpStatus != self::OTP_STATUS_SENT) {
-            return $this->formatResponse('invalidOtp', 'E_INVALID_OTP');
+            return $this->formatResponse('cannotProcess', 'E_UNPROCESSABLE');
         }
 
         if ($this->checkUserReachedMaximumResendLimit($otpInfo)) {
@@ -66,8 +70,7 @@ class Otp implements OtpContract
         $this->otp->updateResendCount($otpInfo);
 
         $otp = base64_decode($otpInfo->otp);
-
-        $this->smsRequestSender($otpInfo->recipient, $otp);
+        $this->smsRequestSender($mobileNumber, $otp);
 
         return $this->formatResponse('otpSent', 'E_OTP_SENT');
     }
@@ -100,14 +103,13 @@ class Otp implements OtpContract
             return $this->formatResponse('otpExpired', 'E_OTP_EXPIRED');
         }
 
-        $this->otp->updateOtpStatus($validateOtp->customerOTPId);
+        $this->otp->updateOtpStatus($validateOtp->driverOTPId);
 
         return false;
     }
 
     public function generateOtpNumber(int $length = 4) : string
     {
-        // for dev env
         if (!env('SMS_ENABLE')) {
             return config('needs.otp');
         }
@@ -126,7 +128,7 @@ class Otp implements OtpContract
     /**
      * Update the wrong Attempts
      *
-     * @param  \App\Models\CustomerOtp  $otpInfo
+     * @param  \App\Models\DriverOtp  $otpInfo
      * @return array|bool
      */
     protected function handleWrongAttempts($otpInfo)
@@ -141,14 +143,15 @@ class Otp implements OtpContract
     /**
      * Check the Wrong Attempts
      *
-     * @param  CustomerOtp  $otpInfo
+     * @param  DriverOtp  $otpInfo
      * @return array|bool
      */
-    protected function checkWrongAttempts(CustomerOtp $otpInfo)
+    protected function checkWrongAttempts(DriverOtp $otpInfo)
     {
         if ((int) $otpInfo->attempts > (int) config('needs.maxOtpAttempts')) {
             if (($otpInfo->otpTypeCode == 'LOG') || ($otpInfo->otpTypeCode == 'REG')) {
                 $this->otp->freezeCustomer($otpInfo->recipient);
+                $this->otp->updateOtpStatus($otpInfo->driverOTPId, self::OTP_BLOCKED);
                 return $this->formatResponse('accountFriezed', 'E_AUTH_FROZEN');
             }
             return $this->formatResponse('maxOtpAttempts', 'E_EXCEED_MAX_ATTEMPTS_OTP');
@@ -162,7 +165,7 @@ class Otp implements OtpContract
      * @param $otpInfo
      * @return bool
      */
-    protected function checkUserReachedMaximumResendLimit(CustomerOtp $otpInfo)
+    protected function checkUserReachedMaximumResendLimit(DriverOtp $otpInfo)
     {
         return ((int) $otpInfo->resendCount > (int) config('needs.maxOtpResend'));
     }

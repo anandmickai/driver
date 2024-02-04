@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class UploadImageService
 {
     const DEFAULT_FILE_KEY = 'file';
-    const DEFAULT_STORAGE_DRIVE = 's3';
-    const DEFAULT_DIRECTORY = 'driver';
+    const DEFAULT_STORAGE_DRIVE = 'local';
+    const DEFAULT_DIRECTORY = 'public/driver';
 
     /**
      * Common function for uploading Documents / images

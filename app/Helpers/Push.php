@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use App\Jobs\SendPushNotification;
-use App\Services\CustomerLoginHistoryService;
+use App\Services\DriverLoginHistoryService;
 
 class Push
 {
@@ -17,9 +17,8 @@ class Push
      */
     public static function sendPushNotification($customerId, $body, string $title = 'MICKAIDO')
     {
-        $customerLogin = new CustomerLoginHistoryService;
-        $session = $customerLogin->getCurrentSession($customerId);
-
+        $driverLogin = new DriverLoginHistoryService();
+        $session = $driverLogin->getCurrentSession($customerId);
         $data = [
             'fcmToken' => $session->fcmToken,
             'title' => $title,

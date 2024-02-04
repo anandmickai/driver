@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\CustomerLoginHistory;
-use App\Services\CustomerLoginHistoryService;
+use App\Services\DriverLoginHistoryService;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -15,8 +14,8 @@ class TokenValidation
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -31,17 +30,19 @@ class TokenValidation
             $token = JWTAuth::getToken();
             $payload = JWTAuth::getPayload($token)->toArray();
             $logError['token'] = $token;
+
             if (!$user = JWTAuth::parseToken()->authenticate()) {
-//                \Log::channel('slack')->critical($logError);
+                \Log::channel('slack')->critical($logError);
                 return response()->fail($error, 'E_UNAUTHORIZED');
             }
+
             $lastLogin = date('Y-m-d H:i:s', $payload['iat']);
-            $activeSessions = CustomerLoginHistoryService::getActiveSessions($user->customerDetailId, $lastLogin);
+            $activeSessions = DriverLoginHistoryService::getActiveSessions($user->driverDetailId, $lastLogin);
             if ((int)$activeSessions > 0) {
                 \Cookie::forget('token');
                 \Log::error('More than one session available. Logging out. Token forbidden');
                 $logError['error'] = 'More than one session available. Logging out. Token forbidden';
-//                \Log::channel('slack')->critical($logError);
+                \Log::channel('slack')->critical($logError);
                 auth()->logout();
                 JWTAuth::invalidate(JWTAuth::parseToken());
                 return response()->fail($error, 'E_UNAUTHORIZED');
@@ -51,30 +52,29 @@ class TokenValidation
             try {
                 $refreshed = JWTAuth::refresh(JWTAuth::getToken());
                 $user = JWTAuth::setToken($refreshed)->toUser();
-                $request->headers->set('Authorization', 'Bearer ' . $refreshed);
+                $request->headers->set('Authorization', 'Bearer '.$refreshed);
             } catch (JWTException $e) {
+                \Log::error('jwt.auth.error',['error' => $e->getMessage()]);
                 $token = JWTAuth::getToken();
-                \Log::error('jwt.auth.error', ['error' => $e->getMessage()]);
                 $logError['token'] = $token;
                 $logError['error'] = 'Token refresh error. Logout';
-//                \Log::channel('slack')->critical($logError);
+                \Log::channel('slack')->critical($logError);
                 return response()->fail($error, 'E_UNAUTHORIZED');
             }
         } catch (JWTException $e) {
-            \Log::error('jwt.auth.error', ['error' => $e->getMessage()]);
-            $logError['error'] = 'Token Authenticate error. Logout ' . $e->getMessage();
-//            \Log::channel('slack')->critical($logError);
+            \Log::error('jwt.auth.error',['error' => $e->getMessage()]);
+            $logError['error'] = 'Token Authenticate error. Logout '.$e->getMessage();
+            \Log::channel('slack')->critical($logError);
             return response()->fail($error, 'E_UNAUTHENTICATED');
         }
 
         // add customerId to request make it globally available over request
         $request->merge([
-                            'customerId' => $user->customerDetailId,
-                            'customerType' => $user->customerType,
-                            'customerStatus' => $user->customerStatus,
-                            'mobileNumber' => $user->customerMobileNumber,
-                            'customerEmail' => $user->customerEmail,
-                        ]);
+            'driverId' => $user->driverDetailId,
+            'driverStatus' => $user->driverStatus,
+            'driverMobileNumber' => $user->driverMobileNumber,
+            'driverEmail' => $user->driverEmail,
+        ]);
 
         $response = $next($request);
 
